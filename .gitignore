@@ -55,7 +55,7 @@ coverage.xml
 *.mo
 *.pot
 
-#ItelliJ
+#ItelliJ	
 .idea/
 
 # Django stuff:
