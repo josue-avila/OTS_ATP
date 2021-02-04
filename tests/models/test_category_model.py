@@ -1,7 +1,7 @@
 import sys
 sys.path.append('.')
 
-from models.categories import Category
+from models.category import Category
 from models.base_model import BaseModel
 import pytest
 
@@ -39,14 +39,17 @@ class TestCategoryModel:
         with pytest.raises(TypeError):
             category = Category(name, 'description test')
 
+
     def test_name_blank_spaces(self):
         with pytest.raises(ValueError):
             category = Category(' ', 'test description')
+
 
     def test_name_is_name(self):
         name = 'N'
         category = Category(name, '')
         assert category.name is name
+
 
     def test_name_max_len(self):
         with pytest.raises(ValueError):
@@ -57,13 +60,16 @@ class TestCategoryModel:
         category = Category('N', description)
         assert category.description is description
 
+
     def test_description_not_none(self):
         with pytest.raises(TypeError):
             category = Category('test name', None)
 
+
     def test_description_not_str(self):
         with pytest.raises(TypeError):
             category = Category('test name', 10)
+
 
     def test_description_len(self):
         with pytest.raises(ValueError):
