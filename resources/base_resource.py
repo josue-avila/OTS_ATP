@@ -18,26 +18,25 @@ class BaseResource(Resource):
 
     def post(self):
         data = request.json
-        item = self.__model_type(**data)
-        print(item)
-        self.__dao.save(item)
+        model = self.__model_type(**data)
+        self.__dao.save(model)
 
-        return item, 201
+        return model, 201
 
     def put(self, identifier):
         data = request.json
 
         if data['id_'] == identifier:
-            item = self.__dao.read_by_id(identifier)
+            model = self.__dao.read_by_id(identifier)
 
             for key, value in data.items():
-                setattr(item, key, value)
+                setattr(model, key, value)
 
-            return self.__dao.save(item)
+            return self.__dao.save(model)
 
         return None, 404
 
     def delete(self, identifier):
-        item = self.__dao.read_by_id(identifier)
-        self.__dao.delete(item)
+        model = self.__dao.read_by_id(identifier)
+        self.__dao.delete(model)
         return None, 204
