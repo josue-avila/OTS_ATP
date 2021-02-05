@@ -12,7 +12,6 @@ class Category(BaseModel):
         self.name = name
         self.description = description
 
-
     @validates('name')
     def validates_name(self, key, name: str) -> str:
         name = validate_type(name, str, key)
