@@ -11,25 +11,24 @@ class BaseResource(Resource):
         self.__dao = dao
         self.__model_type = model_type
 
-    def get(self, id=None):
-        if id:
-            return self.__dao.read_by_id(id)
+    def get(self, identifier=None):
+        if identifier:
+            return self.__dao.read_by_id(identifier)
         return self.__dao.read_all()
 
     def post(self):
         data = request.json
         item = self.__model_type(**data)
+        print(item)
         self.__dao.save(item)
 
         return item, 201
 
-    def put(self, id):
+    def put(self, identifier):
         data = request.json
 
-        if data['id_'] == id:
-            item = self.__dao.read_by_id(id)
-            # updated_item = item(**data)
-            # item.update(updated_item)
+        if data['id_'] == identifier:
+            item = self.__dao.read_by_id(identifier)
 
             for key, value in data.items():
                 setattr(item, key, value)
@@ -38,7 +37,7 @@ class BaseResource(Resource):
 
         return None, 404
 
-    def delete(self, id):
-        item = self.__dao.read_by_id(id)
+    def delete(self, identifier):
+        item = self.__dao.read_by_id(identifier)
         self.__dao.delete(item)
         return None, 204
