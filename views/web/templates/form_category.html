@@ -1,0 +1,31 @@
+{% extends 'template.html' %}
+{% block body %}
+{% if edit %}
+<h1>'Update Seller'</h1>
+<form action="/category/update" method="post">
+    <label>
+        Name:
+    </label>
+    <input name="name" value="{{ category.name }}" type="text"/>
+    <label>
+        Description:
+    </label>
+    <input name="description" value="{{ category.description }}" type="text"/>
+    <input name="id" value="{{ category.id_ }}" type="hidden"/>
+    <input required type="submit" value="update"/>
+</form>
+{% else %}
+<h1>'Create Seller'</h1>
+<form action="/category/create" method='POST'>
+    <label>
+        Name:
+    </label>
+    <input name="name" type="text"/>
+    <label>
+        Description:
+    </label>
+    <input name="description" type="text"/>
+    <input required type="submit" value="create"/>
+</form>
+{% endif %}
+{% endblock %}
